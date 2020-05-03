@@ -1,0 +1,153 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+})
+export class AppComponent {
+  title = 'rl-table-ui-sample';
+  config: any = {
+    height: 300,
+    'class-prefix': 'sortable',
+    'class-fix-header': 'table-fix-heder',
+    pagination: true,
+    pageSize: 5,
+  };
+  tabledata: any = {
+    data: [
+      {
+        id: 1,
+        name: 'Product 1',
+        description: 'Product 1 description',
+        price: 20,
+        available: true,
+        image: 'product.png',
+      },
+      {
+        id: 2,
+        name: 'Product 2',
+        description: 'Product 2 description',
+        price: 60,
+        available: true,
+        image: 'product.png',
+      },
+      {
+        id: 3,
+        name: 'Product 3',
+        description: 'Product 3 description',
+        price: 100,
+        available: true,
+        image: 'product.png',
+      },
+      {
+        id: 4,
+        name: 'Product 4',
+        description: 'Product 4 description',
+        price: 90,
+        available: true,
+        image: 'product.png',
+      },
+      {
+        id: 5,
+        name: 'Product 5',
+        description: 'Product 5 description',
+        price: 10,
+        available: true,
+        image: 'product.png',
+      },
+      {
+        id: 6,
+        name: 'Product 6',
+        description: 'Product 6 description',
+        price: 20,
+        available: true,
+        image: 'product.png',
+      },
+      {
+        id: 7,
+        name: 'Product 7',
+        description: 'Product 7 description',
+        price: 60,
+        available: true,
+        image: 'product.png',
+      },
+      {
+        id: 8,
+        name: 'Product 8',
+        description: 'Product 8 description',
+        price: 100,
+        available: true,
+        image: 'product.png',
+      },
+      {
+        id: 9,
+        name: 'Product 9',
+        description: 'Product 9 description',
+        price: 90,
+        available: true,
+        image: 'product.png',
+      },
+      {
+        id: 10,
+        name: 'Product 10',
+        description: 'Product 10 description',
+        price: 10,
+        available: true,
+        image: 'product.png',
+      },
+    ],
+  };
+  coldef: any[] = [
+    {
+      field: 'name',
+      name: 'Product Name',
+      sort: false,
+      sortEnable: true,
+      type: '',
+      selectAll: false,
+      className: '',
+      prefix: '',
+    },
+    {
+      field: 'description',
+      name: 'Description',
+      sort: false,
+      sortEnable: true,
+      type: '',
+      selectAll: false,
+      className: '',
+      prefix: '',
+    },
+    {
+      field: 'available',
+      name: 'In Stock',
+      sort: false,
+      sortEnable: false,
+      type: 'tick',
+      selectAll: false,
+      className: '',
+      prefix: '',
+    },
+    {
+      field: 'price',
+      name: 'Unit Price',
+      sort: false,
+      sortEnable: true,
+      type: '',
+      selectAll: false,
+      className: '',
+      prefix: '$',
+    },
+    {
+      field: '',
+      name: '',
+      type: 'checkbox',
+      sort: false,
+      sortEnable: false,
+      selectAll: false,
+      className: '',
+      prefix: '',
+    },
+  ];
+}

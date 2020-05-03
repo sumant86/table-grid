@@ -14,7 +14,13 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "rl-table-ui": [
+        "dist/rl-table-ui/rl-table-ui",
+        "dist/rl-table-ui"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

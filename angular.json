@@ -2,5 +2,160 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "rl-table-ui": {
+      "projectType": "library",
+      "root": "projects/rl-table-ui",
+      "sourceRoot": "projects/rl-table-ui/src",
+      "prefix": "rl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/rl-table-ui/tsconfig.lib.json",
+            "project": "projects/rl-table-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/rl-table-ui/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/rl-table-ui/src/test.ts",
+            "tsConfig": "projects/rl-table-ui/tsconfig.spec.json",
+            "karmaConfig": "projects/rl-table-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/rl-table-ui/tsconfig.lib.json",
+              "projects/rl-table-ui/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "rl-table-ui-sample": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/rl-table-ui-sample",
+      "sourceRoot": "projects/rl-table-ui-sample/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/rl-table-ui-sample",
+            "index": "projects/rl-table-ui-sample/src/index.html",
+            "main": "projects/rl-table-ui-sample/src/main.ts",
+            "polyfills": "projects/rl-table-ui-sample/src/polyfills.ts",
+            "tsConfig": "projects/rl-table-ui-sample/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/rl-table-ui-sample/src/favicon.ico",
+              "projects/rl-table-ui-sample/src/assets"
+            ],
+            "styles": ["projects/rl-table-ui-sample/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/rl-table-ui-sample/src/environments/environment.ts",
+                  "with": "projects/rl-table-ui-sample/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "rl-table-ui-sample:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "rl-table-ui-sample:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "rl-table-ui-sample:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/rl-table-ui-sample/src/test.ts",
+            "polyfills": "projects/rl-table-ui-sample/src/polyfills.ts",
+            "tsConfig": "projects/rl-table-ui-sample/tsconfig.spec.json",
+            "karmaConfig": "projects/rl-table-ui-sample/karma.conf.js",
+            "assets": [
+              "projects/rl-table-ui-sample/src/favicon.ico",
+              "projects/rl-table-ui-sample/src/assets"
+            ],
+            "styles": ["projects/rl-table-ui-sample/src/styles.scss"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/rl-table-ui-sample/tsconfig.app.json",
+              "projects/rl-table-ui-sample/tsconfig.spec.json",
+              "projects/rl-table-ui-sample/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/rl-table-ui-sample/e2e/protractor.conf.js",
+            "devServerTarget": "rl-table-ui-sample:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "rl-table-ui-sample:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "rl-table-ui"
 }

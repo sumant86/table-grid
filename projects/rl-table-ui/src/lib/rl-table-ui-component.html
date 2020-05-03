@@ -1,0 +1,101 @@
+<div class="{{config['class-prefix']}}-table {{config['class-fix-header']}}">
+  <table>
+    <thead>
+      <tr>
+        <ng-container
+          *ngFor="let header of coldef"
+          class="config['class-prefix']"
+        >
+          <th
+            scope="col"
+            *ngIf="header.type !== 'hidden'"
+            [ngClass]="{ 'select-checkbox': header.type === 'checkbox' }"
+          >
+            <span
+              class="{{config['class-prefix']}}-header"
+              (click)="sortColumn(header)"
+            >
+              {{ header.name }}
+              <span *ngIf="header.sortEnable && header.sort === 'asc'">▴</span>
+              <span *ngIf="header.sortEnable && header.sort === 'desc'">▾</span>
+              <span *ngIf="header.sortEnable && !header.sort">▴▾</span>
+            </span>
+          </th>
+        </ng-container>
+      </tr>
+    </thead>
+  </table>
+</div>
+<div class="{{config['class-prefix']}}-table scroll">
+  <table>
+    <tbody>
+      <tr *ngFor="let ec of filteredtabledata">
+        <ng-container *ngFor="let header of coldef">
+          <td
+            [attr.data-label]="header.name"
+            *ngIf="header.type !== 'hidden'"
+            [ngClass]="{ 'select-checkbox': header.type === 'checkbox' }"
+          >
+            <ng-container *ngIf="header.type === 'checkbox'">
+              checkBox
+            </ng-container>
+            <ng-container *ngIf="header.type === 'date'">
+              {{ ec[header.field] | date: "yyyy-MM-dd" }}
+            </ng-container>
+            <ng-container *ngIf="header.type === 'tick'">
+              <span
+                ><span *ngIf="ec[header.field]">✓</span>
+                <span *ngIf="!ec[header.field]">✗</span></span
+              >
+            </ng-container>
+            <ng-container
+              *ngIf="
+              header.type !== 'date' &&
+              header.type !== 'checkbox' &&
+              header.type !== 'tick'
+            "
+            >
+              <ng-container *ngIf="header.prefix"
+                >{{ header.prefix }}</ng-container
+              >
+              {{ ec[header.field] }}
+            </ng-container>
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p class="pagination" *ngIf="config.pagination">
+  <span class="keep_left"
+    >Total <strong>{{_tabledata.length}}</strong> records available</span
+  >
+  <span class="keep_right">
+    <ng-container *ngIf="filteredtabledata && filteredtabledata.length > 0">
+      Showing {{skip+1}} to {{skip + filteredtabledata.slice(skip, top).length}}
+      results...
+    </ng-container>
+    <ng-container *ngIf="filteredtabledata && filteredtabledata.length === 0">
+      Showing {{skip}} to {{skip + filteredtabledata.slice(skip, top).length}}
+      results...
+    </ng-container>
+    <button [disabled]="skip<=0" (click)="nextPage('first')">
+      <<
+    </button>
+    <button [disabled]="skip<=0" (click)="nextPage('prev')">
+      <
+    </button>
+    <button
+      [disabled]="_tabledata.length <= (skip + pageSize)"
+      (click)="nextPage('next')"
+    >
+      >
+    </button>
+    <button
+      [disabled]="_tabledata.length <= (skip + pageSize)"
+      (click)="nextPage('last')"
+    >
+      >>
+    </button>
+  </span>
+</p>
