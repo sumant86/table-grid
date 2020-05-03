@@ -86,7 +86,8 @@ export class RlTableUiComponent implements OnInit {
         this._tabledata,
         [column.field.trim()],
         [column.sort]
-      );
+      ).slice(this.skip, this.top);
+      // this.filteredtabledata = this._tabledata.slice(this.skip, this.top);
     } else {
       //Reset of filter icons.
       this.getPageData();
